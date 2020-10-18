@@ -13,10 +13,10 @@ jobs:
         npm run lint
         npm run build
   test:
-      - uses: actions/upload-artifact@master
-        with:
+    - uses: actions/upload-artifact@master
+      with:
     needs: build
-          path: public/
+      path: public/
     strategy:
       matrix:
         os: [ubuntu-latest, windows-2016]
