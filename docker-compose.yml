@@ -12,6 +12,20 @@ services:
       POSTGRES_USER: boilerplate
       POSTGRES_DB: boilerplate
       POSTGRES_PASSWORD: boilerplate
+
+  postgres-test:
+    image: postgres
+    ports:
+      - '9003:5432'
+    networks:
+      - db-net
+    volumes:
+      - /var/lib/backend-boilerplate/test-data
+    environment:
+      POSTGRES_USER: boilerplate-test
+      POSTGRES_DB: boilerplate-test
+      POSTGRES_PASSWORD: boilerplate-test
+
 networks:
   db-net:
     driver: bridge

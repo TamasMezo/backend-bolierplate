@@ -1,19 +1,22 @@
+const { Config } = require('@foal/core')
+
 const configBase = {
-  host: process.env.DB_HOST || '127.0.0.1',
-  port: process.env.DB_PORT || '9002',
-  database: process.env.DB_NAME || 'boilerplate',
-  username: process.env.DB_USER || 'boilerplate',
-  password: process.env.DB_PASSWORD || 'boilerplate',
-  type: 'postgres',
+  type: Config.get('database.type'),
+  database: Config.get('database.database'),
+  host:  Config.get('database.host'),
+  port: Config.get('database.port'),
+  username: Config.get('database.username'),
+  password: Config.get('database.password'),
   cli: {
     migrationsDir: 'src/migrations',
   },
   logging: false,
-  synchronize: false,
+  synchronize: Config.get('database.synchronize') || false,
   seeds: ['build/app/db/seeds/**/*.js'],
   factories: ['build/app/db/factories/**/*.js'],
   entities: ['build/app/**/*.entity.js'],
   migrations: ['build/migrations/*.js'],
 };
+
 
 module.exports = configBase;

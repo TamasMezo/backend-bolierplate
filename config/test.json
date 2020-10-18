@@ -1,6 +1,11 @@
 {
   "database": {
-    "database": "./test_db.sqlite3",
+    "type": "postgres",
+    "database": "boilerplate-test",
+    "host": "127.0.0.1",
+    "port": "9003",
+    "username": "boilerplate-test",
+    "password": "boilerplate-test",
     "dropSchema": true,
     "synchronize": true
   }
