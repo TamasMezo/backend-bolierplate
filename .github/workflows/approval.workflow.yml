@@ -4,8 +4,8 @@ jobs:
   labelWhenApproved:
     runs-on: ubuntu-latest
     steps:
-      - uses: label-when-approved-action
       - name: run label whem approved
+        uses: label-when-approved-action
         env:
           APPROVALS: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
