@@ -1,7 +1,7 @@
 
-name: Node.js CI
+name: Node CI
 
-on:
+on: 
   push:
     branches: [ master ]
   pull_request:
@@ -10,31 +10,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: npm install and build webpack
-      run: |
-        npm install
-        npm run build
-  
-  test:
+    steps: 
+      - uses: actions/checkout@v2
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+          
+    test:
       - uses: actions/upload-artifact@master
         with:
-    needs: build
-          path: public/
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-2016]
-        node-version: [12.x, 14.x]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, and test
-      run: |
-        npm install
-        npm test
-      env:
-        CI: true
+        needs: build
+        path: public/
+        strategy:
+          matrix:
+            node-version: [12.x]
+        steps:
+        - uses: actions/checkout@v2     
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: npm install, build, and test
+          run: |
+            npm install
+            npm run lint
+            npm run build:test && npm run start:test
+            npm run build:e2e && npm run start:e2e
+          env:
+            CI: true
