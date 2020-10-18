@@ -1,6 +1,11 @@
+
 name: Node.js CI
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -10,13 +15,13 @@ jobs:
     - name: npm install and build webpack
       run: |
         npm install
-        npm run lint
         npm run build
+  
   test:
-    - uses: actions/upload-artifact@master
-      with:
+      - uses: actions/upload-artifact@master
+        with:
     needs: build
-      path: public/
+          path: public/
     strategy:
       matrix:
         os: [ubuntu-latest, windows-2016]
