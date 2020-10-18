@@ -9,7 +9,9 @@
       "cookie": {
         "sameSite": "lax"
       },
-      "secret": "zCvz1beWpxNw+3UZ0w8tRAYaKUXaTX0vOnW5SCvNyYM="
+      "jwt": {
+        "secretOrPublicKey": "zCvz1beWpxNw+3UZ0w8tRAYaKUXaTX0vOnW5SCvNyYM="
+      }
     }
   },
   "database": {

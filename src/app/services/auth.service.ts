@@ -44,7 +44,6 @@ export class AuthService {
       id: user.id,
     };
     const secret = Config.get<string>('settings.jwt.secretOrPublicKey');
-    console.log(secret);
     const token = await new Promise<string>((resolve, reject) => {
       sign(payload, secret, { subject: user.id.toString() }, (err, value: string) => {
         if (err) {
