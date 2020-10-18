@@ -1,0 +1,17 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - '9002:5432'
+    networks:
+      - db-net
+    volumes:
+      - /var/lib/backend-boilerplate/data
+    environment:
+      POSTGRES_USER: boilerplate
+      POSTGRES_DB: boilerplate
+      POSTGRES_PASSWORD: boilerplate
+networks:
+  db-net:
+    driver: bridge

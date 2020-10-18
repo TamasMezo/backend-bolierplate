@@ -1,10 +1,24 @@
-import { Context, Get, HttpResponseOK } from '@foal/core';
+import { dependency, ServiceManager, TokenOptional } from '@foal/core';
+import { GraphQLController } from '@foal/graphql';
+import { TypeORMStore, fetchUser } from '@foal/typeorm';
+import { buildSchema } from 'type-graphql';
 
-export class ApiController {
+import { UserResolver, AuthResolver } from '../graphql';
 
-  @Get('/')
-  index(ctx: Context) {
-    return new HttpResponseOK('Hello world!');
-  }
+import { User } from '../entities';
 
+@TokenOptional({
+  store: TypeORMStore,
+  user: fetchUser(User),
+  cookie: false,
+})
+export class ApiController extends GraphQLController {
+  @dependency
+  private services: ServiceManager;
+
+  schema = buildSchema({
+    resolvers: [AuthResolver, UserResolver],
+    container: { get: className => this.services.get(className) },
+    //authChecker: (...args) => authChecker(this.services.get(ConnectionService))(...args),
+  });
 }

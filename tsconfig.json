@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "build",
+    //"moduleResolution": "node",
     "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -12,10 +13,15 @@
     "rootDir": "src",
     "lib": [
       "es2017",
-      "dom"
+      "dom",
+      "ESNext.AsyncIterable"
     ]
   },
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
   "include": [
     "src/**/*.ts"
-  ]
+  ],
 }

@@ -1,17 +1,19 @@
 {
   "port": 3001,
+  "baseUrl": "http://localhost:3001",
   "settings": {
     "csrf": false,
-    "debug": false,
+    "debug": true,
     "loggerFormat": "tiny",
     "session": {
       "cookie": {
         "sameSite": "lax"
-      }
+      },
+      "secret": "zCvz1beWpxNw+3UZ0w8tRAYaKUXaTX0vOnW5SCvNyYM="
     }
   },
   "database": {
-    "database": "./db.sqlite3",
+    "database": "postgres",
     "synchronize": false
   }
 }

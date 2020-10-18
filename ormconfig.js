@@ -1,13 +1,19 @@
-const { Config } = require('@foal/core');
-
-module.exports = {
-  type: "sqlite",
-  database: Config.get2('database.database', 'string'),
-  dropSchema: Config.get2('database.dropSchema', 'boolean', false),
-  entities: ["build/app/**/*.entity.js"],
-  migrations: ["build/migrations/*.js"],
+const configBase = {
+  host: process.env.DB_HOST || '127.0.0.1',
+  port: process.env.DB_PORT || '9002',
+  database: process.env.DB_NAME || 'boilerplate',
+  username: process.env.DB_USER || 'boilerplate',
+  password: process.env.DB_PASSWORD || 'boilerplate',
+  type: 'postgres',
   cli: {
-    migrationsDir: "src/migrations"
+    migrationsDir: 'src/migrations',
   },
-  synchronize: Config.get2('database.synchronize', 'boolean', false)
-}
+  logging: false,
+  synchronize: false,
+  seeds: ['build/app/db/seeds/**/*.js'],
+  factories: ['build/app/db/factories/**/*.js'],
+  entities: ['build/app/**/*.entity.js'],
+  migrations: ['build/migrations/*.js'],
+};
+
+module.exports = configBase;
